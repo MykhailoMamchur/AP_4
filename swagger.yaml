@@ -15,7 +15,7 @@ components:
   schemas:
     userInformation:
       required:
-      - username
+      - phone
       - password
       - firstName
       - lastName
@@ -25,9 +25,9 @@ components:
       - hasOtherLoans
       type: object
       properties:
-        username:
+        phone:
           type: string
-          example: john_doe
+          example: +380630101010
         password:
           type: string
           example: qwerty123
@@ -54,9 +54,9 @@ components:
     user:
       type: object
       properties:
-        username:
+        phone:
           type: string
-          example: john_doe
+          example: +380630101010
         loansCount:
           type: integer
           example: 1
@@ -135,9 +135,9 @@ paths:
       - user
       summary: User login.
       parameters:
-      - name: username
+      - name: phone
         in: query
-        description: The username for login
+        description: The phone for login
         required: true
         schema:
           type: string
