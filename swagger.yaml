@@ -8,9 +8,11 @@ servers:
 - url: http://loans.swagger.io/v1
 tags:
 - name: user
-  description: Operations assosiated with users.
+  description: User entity.
 - name: loan
-  description: Operations assosiated with loans.
+  description: Loan entity.
+- name: payment
+  description: Payment entity.
 components:
   schemas:
     userInformation:
@@ -94,6 +96,31 @@ components:
         months:
           type: integer
           example: 12
+        payments:
+          type: array
+          items:
+            type: integer
+          example:
+          - 1
+          - 2
+          - 3 
+    payment:
+      required:
+      - paymentId
+      - amount
+      - paidDate
+      type: object
+      properties:
+        paymentId:
+          type: integer
+          example: 1
+        amount:
+          type: integer
+          example: 1000
+        paidDate:
+          type: integer
+          example: 1633899108
+        
   securitySchemes:
     api_key:
       type: apiKey
@@ -222,6 +249,7 @@ paths:
           content: {}
       security:
       - api_key: []
+  
   /loan:
     post:
       tags:
@@ -272,15 +300,22 @@ paths:
         404:
           description: Loan with specified loanId not found.
           content: {}
-  /loan/{loanId}/repay:
+  /pay/{loanId}:
     post:
       tags:
-      - loan
+      - payment
       summary: Repays the loan.
       parameters:
       - name: loanId
         in: path
         description: The loan id.
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+      - name: amount
+        in: query
+        description: The amount of payment.
         required: true
         schema:
           minimum: 1
@@ -294,4 +329,31 @@ paths:
           content: {}
         404:
           description: Loan with specified loanId not found.
+          content: {}
+    get:
+      tags:
+      - payment
+      summary: Returns information about repays.
+      parameters:
+      - name: loanId
+        in: path
+        description: The loan id.
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+      responses:
+        200:
+          description: The user information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/payment'
+        400:
+          description: Invalid userId.
+          content: {}
+        404:
+          description: User with specified userId not found.
           content: {}
