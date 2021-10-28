@@ -24,9 +24,10 @@ components:
         - age
         - monthlyEarnings
         - occupation
-        - hasOtherLoans
       type: object
       properties:
+        userId:
+          type: integer
         phone:
           type: string
           example: +380630101010
@@ -50,15 +51,11 @@ components:
         occupation:
           type: string
           example: student
-        hasOtherLoans:
-          type: boolean
-          example: false
     user:
       type: object
       properties:
-        phone:
-          type: string
-          example: +380630101010
+        userId:
+          type: integer
         loansCount:
           type: integer
           example: 1
@@ -91,11 +88,13 @@ components:
           default: false
           example: false
         createdDate:
-          type: integer
+          type: string
           example: 1633899108
         months:
           type: integer
           example: 12
+        userId:
+          type: integer
         payments:
           type: array
           items:
@@ -118,8 +117,10 @@ components:
           type: integer
           example: 1000
         paidDate:
-          type: integer
+          type: string
           example: 1633899108
+        loanId:
+          type: integer
 
   securitySchemes:
     api_key:
