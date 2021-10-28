@@ -52,11 +52,10 @@ class User(Base):
     __tablename__ = "User"
     userId = Column(INTEGER, primary_key=True)
     loans = relationship(Loan, back_populates="user")
-    phone = Column(VARCHAR(255), nullable=False)
+    phone = Column(VARCHAR(255), nullable=False, unique=True)
     password = Column(VARCHAR(255), nullable=False)
     firstName = Column(VARCHAR(255), nullable=False)
     lastName = Column(VARCHAR(255), nullable=False)
-
     age = Column(INTEGER, nullable=False)
     monthlyEarnings = Column(INTEGER, nullable=False)
     occupation = Column(VARCHAR(255), nullable=False)
