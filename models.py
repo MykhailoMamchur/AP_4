@@ -3,13 +3,14 @@ import datetime
 from sqlalchemy import create_engine, Column, ForeignKey, PrimaryKeyConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy.sql.sqltypes import DECIMAL, INTEGER, DATE, VARCHAR, BOOLEAN
+from sqlalchemy.sql.sqltypes import DECIMAL, INTEGER, DATE, VARCHAR, BOOLEAN, BINARY
 
-from PWD import PWD
+#from PWD import PWD
 
 Base = declarative_base()
 
-DB_URI = f"mysql://admin:{PWD}@localhost/ap_4?charset=utf8mb4"
+#DB_URI = f"mysql://admin:{PWD}@localhost/ap_4?charset=utf8mb4"
+DB_URI = "mysql://root:password@localhost/ap_4"
 
 
 class Payment(Base):
@@ -53,14 +54,15 @@ class User(Base):
     userId = Column(INTEGER, primary_key=True)
     loans = relationship(Loan, back_populates="user")
     phone = Column(VARCHAR(255), nullable=False, unique=True)
-    password = Column(VARCHAR(255), nullable=False)
+    password = Column(BINARY(60), nullable=False)
     firstName = Column(VARCHAR(255), nullable=False)
     lastName = Column(VARCHAR(255), nullable=False)
     age = Column(INTEGER, nullable=False)
     monthlyEarnings = Column(INTEGER, nullable=False)
     occupation = Column(VARCHAR(255), nullable=False)
+    api_key = Column(VARCHAR(32), nullable=False, unique=True)
 
-    def __init__(self, phone, password, firstName, lastName, age, monthlyEarnings, occupation):
+    def __init__(self, phone, password, firstName, lastName, age, monthlyEarnings, occupation, api_key):
         self.phone = phone
         self.password = password
         self.firstName = firstName
@@ -68,6 +70,7 @@ class User(Base):
         self.age = age
         self.monthlyEarnings = monthlyEarnings
         self.occupation = occupation
+        self.api_key = api_key
 
     def __repr__(self):
         return f"{self.firstName} {self.lastName} {self.loans}"
