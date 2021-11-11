@@ -21,12 +21,13 @@ def upgrade():
     op.create_table('User',
     sa.Column('userId', sa.INTEGER(), nullable=False),
     sa.Column('phone', sa.VARCHAR(length=255), nullable=False),
-    sa.Column('password', sa.VARCHAR(length=255), nullable=False),
+    sa.Column('password', sa.BINARY(length=60), nullable=False),
     sa.Column('firstName', sa.VARCHAR(length=255), nullable=False),
     sa.Column('lastName', sa.VARCHAR(length=255), nullable=False),
     sa.Column('age', sa.INTEGER(), nullable=False),
     sa.Column('monthlyEarnings', sa.INTEGER(), nullable=False),
     sa.Column('occupation', sa.VARCHAR(length=255), nullable=False),
+    sa.Column('api_key', sa.VARCHAR(length=32), nullable=False, unique=True),
     sa.PrimaryKeyConstraint('userId'),
     sa.UniqueConstraint('phone')
     )
