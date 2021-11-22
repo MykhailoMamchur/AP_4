@@ -205,6 +205,8 @@ paths:
         default:
           description: Successful operation.
           content: { }
+      security:
+        - api_key: [ ]
   /user/{userId}:
     get:
       tags:
@@ -231,6 +233,8 @@ paths:
         404:
           description: User with specified userId not found.
           content: { }
+      security:
+        - api_key: [ ]
     delete:
       tags:
         - user
@@ -276,6 +280,8 @@ paths:
         400:
           description: Invalid parameters.
           content: { }
+      security:
+        - api_key: [ ]
   /loan/{loanId}:
     get:
       tags:
@@ -302,6 +308,8 @@ paths:
         404:
           description: Loan with specified loanId not found.
           content: { }
+      security:
+        - api_key: [ ]
   /pay/{loanId}:
     post:
       tags:
@@ -332,6 +340,8 @@ paths:
         404:
           description: Loan with specified loanId not found.
           content: { }
+      security:
+        - api_key: [ ]
     get:
       tags:
         - payment
@@ -359,3 +369,5 @@ paths:
         404:
           description: User with specified userId not found.
           content: { }
+      security:
+        - api_key: [ ]

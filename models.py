@@ -60,9 +60,10 @@ class User(Base):
     age = Column(INTEGER, nullable=False)
     monthlyEarnings = Column(INTEGER, nullable=False)
     occupation = Column(VARCHAR(255), nullable=False)
-    api_key = Column(VARCHAR(32), nullable=False, unique=True)
+    api_key = Column(VARCHAR(512), nullable=False, unique=True)
+    isAdmin = Column(BOOLEAN, nullable=False)
 
-    def __init__(self, phone, password, firstName, lastName, age, monthlyEarnings, occupation, api_key):
+    def __init__(self, phone, password, firstName, lastName, age, monthlyEarnings, occupation, api_key, isAdmin):
         self.phone = phone
         self.password = password
         self.firstName = firstName
@@ -71,6 +72,7 @@ class User(Base):
         self.monthlyEarnings = monthlyEarnings
         self.occupation = occupation
         self.api_key = api_key
+        self.isAdmin = isAdmin
 
     def __repr__(self):
         return f"{self.firstName} {self.lastName} {self.loans}"
@@ -87,7 +89,7 @@ if __name__ == '__main__':
         users = []
         loans = []
         for i in range(1):
-            usr = User("+3823424242", "pwd", "Петро", "Шпак", 42, 56, "job")
+            usr = User("+3823424242", "pwd", "Петро", "Шпак", 42, 56, "job", False)
             session.add(usr)
             users.append(usr)
         session.commit()
