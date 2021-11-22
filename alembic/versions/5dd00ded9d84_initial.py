@@ -27,7 +27,8 @@ def upgrade():
     sa.Column('age', sa.INTEGER(), nullable=False),
     sa.Column('monthlyEarnings', sa.INTEGER(), nullable=False),
     sa.Column('occupation', sa.VARCHAR(length=255), nullable=False),
-    sa.Column('api_key', sa.VARCHAR(length=32), nullable=False, unique=True),
+    sa.Column('api_key', sa.VARCHAR(length=512), nullable=False, unique=True),
+    sa.Column('isAdmin', sa.BOOLEAN(), nullable=False),
     sa.PrimaryKeyConstraint('userId'),
     sa.UniqueConstraint('phone')
     )
